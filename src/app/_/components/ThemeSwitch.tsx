@@ -10,7 +10,7 @@ export enum Themes {
 export const localStorageThemeKey = "theme";
 export const dataAttributeKey = "data-theme";
 
-const getFromLS = () => localStorage.getItem(localStorageThemeKey) as Themes;
+const getFromLS = () => localStorage.getItem(localStorageThemeKey) as Themes | null;
 const setToLS = (theme: Themes) => localStorage.setItem(localStorageThemeKey, theme);
 
 export function ThemeSwitch() {
@@ -18,7 +18,10 @@ export function ThemeSwitch() {
 
   const setThemeFromLS = useCallback(() => {
     const themeFromLS = getFromLS();
-    setTheme(themeFromLS);
+
+    if (themeFromLS) {
+      setTheme(themeFromLS);
+    }
   }, []);
 
   const handleThemeSwitch = () => {
