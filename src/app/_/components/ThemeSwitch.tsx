@@ -7,14 +7,16 @@ export enum Themes {
   light = "light",
 }
 
+type Theme = keyof typeof Themes;
+
 export const localStorageThemeKey = "theme";
 export const dataAttributeKey = "data-theme";
 
-const getFromLS = () => localStorage.getItem(localStorageThemeKey) as Themes | null;
-const setToLS = (theme: Themes) => localStorage.setItem(localStorageThemeKey, theme);
+const getFromLS = () => localStorage.getItem(localStorageThemeKey) as Theme;
+const setToLS = (theme: Theme) => localStorage.setItem(localStorageThemeKey, theme);
 
 export function ThemeSwitch() {
-  const [theme, setTheme] = useState<Themes>();
+  const [theme, setTheme] = useState<Theme>();
 
   const setThemeFromLS = useCallback(() => {
     const themeFromLS = getFromLS();
